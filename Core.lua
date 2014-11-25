@@ -29,28 +29,6 @@ function AfterActionReport:OnInitialize()
 	
 	self:RegisterChatCommand("aar", "OpenConfig", true, true)
 	self:RegisterChatCommand("afteraction", "OpenConfig", true, true)
-	
-	local spy = CreateFrame("FRAME", nil, UIParent)
-	spy.name = "AfterActionReport"
-	spy.addon = "AfterActionReport_Options"
-	spy:Hide()
-	spy:SetScript("OnShow", function(self)
-		--remove the dummy entry
-		for i, f in ipairs(INTERFACEOPTIONS_ADDONCATEGORIES) do
-			if f == self.name or f.name == self.name then
-				tremove(INTERFACEOPTIONS_ADDONCATEGORIES, i)
-				break
-			end
-		end
-		self:Hide()
-		
-		--load the config
-		LoadAddOn(self.addon)
-		
-		--refresh the screen
-		InterfaceOptionsFrame_OpenToCategory(self.name)
-	end)
-	InterfaceOptions_AddCategory(spy)
 end
 
 function AfterActionReport:OnEnable()
